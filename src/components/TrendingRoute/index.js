@@ -4,8 +4,9 @@ import Cookies from 'js-cookie'
 import Loader from 'react-loader-spinner'
 import ContextComponent from '../../context/ContextComponent'
 import Header from '../Header'
-import NavigationLinks from '../NavigationLinks'
+import NavigationBar from '../NavigationBar'
 import VideoCard from '../VideoCard'
+import FetchVideosFailure from '../FetchVideosFailure'
 
 import {
   TrendingVideosBgContainer,
@@ -54,7 +55,7 @@ class TrendingRoute extends Component {
 
   fetchVideoDetails = async () => {
     this.setState({apiStatus: apiStatusConstants.loading})
-    const jwtToken = Cookies.get('a7_token')
+    const jwtToken = Cookies.get('jwt_token')
 
     const url = 'https://apis.ccbp.in/videos/trending'
     const options = {
@@ -73,8 +74,8 @@ class TrendingRoute extends Component {
   }
 
   renderFetchLoading = () => (
-    <LoadSpinnerContainer>
-      <Loader color="grey" type="TailSpin" size={40} />
+    <LoadSpinnerContainer data-testid="loader">
+      <Loader color="grey" type="TailSpin" size={30} />
     </LoadSpinnerContainer>
   )
 
@@ -83,7 +84,7 @@ class TrendingRoute extends Component {
     return (
       <ListOfTrendingVideos>
         {trendingVideos.map(eachVideo => (
-          <VideoCard videoDetails={eachVideo} />
+          <VideoCard key={eachVideo.id} videoDetails={eachVideo} />
         ))}
       </ListOfTrendingVideos>
     )
@@ -97,6 +98,8 @@ class TrendingRoute extends Component {
         return this.renderFetchLoading()
       case apiStatusConstants.success:
         return this.renderFetchSuccess()
+      case apiStatusConstants.failure:
+        return <FetchVideosFailure retry={this.fetchVideoDetails} />
       default:
         return null
     }
@@ -112,8 +115,8 @@ class TrendingRoute extends Component {
             <>
               <Header />
               <TrendingVideosBgContainer isDarkTheme={isDarkTheme}>
-                <NavigationLinks />
-                <MainContainer isDarkTheme={isDarkTheme}>
+                <NavigationBar />
+                <MainContainer data-testid="trending" isDarkTheme={isDarkTheme}>
                   {apiStatus === 'ON_SUCCESS' && (
                     <TrendingVideosHeadingContainer isDarkTheme={isDarkTheme}>
                       <FireIconContainer>

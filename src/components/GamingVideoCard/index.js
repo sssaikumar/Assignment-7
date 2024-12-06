@@ -20,7 +20,7 @@ const GamingVideoCard = props => {
           <VideoItemCard>
             <VideoThumbNailContainer>
               <Link to={`/videos/${id}`}>
-                <VideoThumbNailImage src={thumbnailUrl} />
+                <VideoThumbNailImage src={thumbnailUrl} alt="video thumbnail" />
               </Link>
             </VideoThumbNailContainer>
             <Title isDarkTheme={isDarkTheme}>{title}</Title>

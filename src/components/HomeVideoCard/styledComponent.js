@@ -1,8 +1,9 @@
 import styled from 'styled-components'
 
-export const MainVideoCart = styled.div`
+export const MainVideoCart = styled.li`
+  list-style-type: none;
   width: 100%;
-  font-family: roboto;
+  font-family: 'Roboto';
   @media screen and (max-width: 575px) {
     margin-bottom: 15px;
   }

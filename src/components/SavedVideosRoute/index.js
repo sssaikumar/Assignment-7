@@ -1,7 +1,7 @@
 import {MdPlaylistAdd} from 'react-icons/md'
 import ContextComponent from '../../context/ContextComponent'
 import Header from '../Header'
-import NavigationLinks from '../NavigationLinks'
+import NavigationBar from '../NavigationBar'
 import VideoCard from '../VideoCard'
 
 import {
@@ -11,10 +11,13 @@ import {
   AddToPlayListIconContainer,
   Heading,
   ListOfSavedVideos,
+  NoVideosContainer,
   NoVideosImage,
+  NoVideosHeading,
+  NoVideosPara,
 } from './styledComponent'
 
-const SavedVideos = () => (
+const SavedVideosRoute = () => (
   <ContextComponent.Consumer>
     {value => {
       const {savedVideosList, isDarkTheme} = value
@@ -23,8 +26,8 @@ const SavedVideos = () => (
         <>
           <Header />
           <SavedVideosBgContainer isDarkTheme={isDarkTheme}>
-            <NavigationLinks />
-            <MainContainer>
+            <NavigationBar />
+            <MainContainer data-testid="savedVideos">
               {savedVideosList.length > 0 ? (
                 <>
                   <SavedVideosHeadingContainer isDarkTheme={isDarkTheme}>
@@ -40,10 +43,16 @@ const SavedVideos = () => (
                   </ListOfSavedVideos>
                 </>
               ) : (
-                <NoVideosImage
-                  alt="no saved videos"
-                  src="https://assets.ccbp.in/frontend/react-js/nxt-watch-no-saved-videos-img.png "
-                />
+                <NoVideosContainer isDarkTheme={isDarkTheme}>
+                  <NoVideosImage
+                    alt="no saved videos"
+                    src="https://assets.ccbp.in/frontend/react-js/nxt-watch-no-saved-videos-img.png "
+                  />
+                  <NoVideosHeading>No saved videos found</NoVideosHeading>
+                  <NoVideosPara>
+                    You can save your videos while watching them
+                  </NoVideosPara>
+                </NoVideosContainer>
               )}
             </MainContainer>
           </SavedVideosBgContainer>
@@ -52,4 +61,4 @@ const SavedVideos = () => (
     }}
   </ContextComponent.Consumer>
 )
-export default SavedVideos
+export default SavedVideosRoute

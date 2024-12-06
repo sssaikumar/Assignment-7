@@ -30,10 +30,10 @@ const HomeVideoCard = props => (
       return (
         <MainVideoCart isDarkTheme={isDarkTheme}>
           <Link to={`/videos/${id}`}>
-            <ThumbnailImage src={thumbnailUrl} />
+            <ThumbnailImage src={thumbnailUrl} alt="video thumbnail" />
           </Link>
           <VideoDescriptionContainer>
-            <ChannelProfile src={profileImageUrl} />
+            <ChannelProfile src={profileImageUrl} alt="channel logo" />
             <VideoDetailsContainer isDarkTheme={isDarkTheme}>
               <Title>{title}</Title>
               <ChannelName isDarkTheme={isDarkTheme}>{name}</ChannelName>

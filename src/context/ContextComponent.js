@@ -6,6 +6,6 @@ const ContextComponent = React.createContext({
   savedVideosList: [],
   addToSaveVideos: () => {},
   changeActiveNavigationStyling: () => {},
-  activeTab: 'initial',
+  activeTab: 'home',
 })
 export default ContextComponent

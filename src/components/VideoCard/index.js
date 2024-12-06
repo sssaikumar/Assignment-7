@@ -35,11 +35,11 @@ const VideoCard = props => {
           <VideoItemCard>
             <VideoThumbNailContainer>
               <Link to={`/videos/${id}`}>
-                <VideoThumbNailImage src={thumbnailUrl} />
+                <VideoThumbNailImage src={thumbnailUrl} alt="video thumbnail" />
               </Link>
             </VideoThumbNailContainer>
             <AboutVideoDetailsContainer>
-              <ChannelProfileImage src={profileImageUrl} />
+              <ChannelProfileImage src={profileImageUrl} alt="channel logo" />
               <TitleAndViewsChannelNameAndDateBgContainer>
                 <Title>{title}</Title>
                 <ChannelNameViewsAndPublishedDateContainer>

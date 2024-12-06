@@ -3,7 +3,7 @@ import Cookies from 'js-cookie'
 import Popup from 'reactjs-popup'
 import {BsBrightnessHigh} from 'react-icons/bs'
 import {FaMoon} from 'react-icons/fa'
-
+import {GiHamburgerMenu} from 'react-icons/gi'
 import {FiLogOut} from 'react-icons/fi'
 
 import ContextComponent from '../../context/ContextComponent'
@@ -13,6 +13,7 @@ import {
   ThemeAndLogoutAndProfileContainer,
   ThemeButton,
   ProfileImage,
+  HamburgerIconContainer,
   ModalContainer,
   ModalDescription,
   ButtonsContainer,
@@ -24,9 +25,9 @@ import {
 
 const Header = props => {
   const onClickLogout = () => {
-    Cookies.remove('a7_token')
+    Cookies.remove('jwt_token')
     const {history} = props
-    history.replace('/')
+    history.replace('/login')
   }
 
   return (
@@ -54,21 +55,25 @@ const Header = props => {
                 onClick={onClickChangeTheme}
               >
                 {isDarkTheme ? (
-                  <BsBrightnessHigh color="#fcfafa" size={22} />
+                  <BsBrightnessHigh color="#fcfafa" size={25} />
                 ) : (
-                  <FaMoon size={22} />
+                  <FaMoon size={25} />
                 )}
               </ThemeButton>
               <ProfileImage
                 src="https://assets.ccbp.in/frontend/react-js/nxt-watch-profile-img.png"
                 alt="profile"
               />
+              <HamburgerIconContainer>
+                <GiHamburgerMenu size={22} />
+              </HamburgerIconContainer>
               <Popup
                 modal
                 trigger={
                   <LogoutButton
                     onClick={onClickLogout}
                     isDarkTheme={isDarkTheme}
+                    type="button"
                   >
                     Logout
                   </LogoutButton>

@@ -1,18 +1,18 @@
 import {Component} from 'react'
-import {Switch, Route} from 'react-router-dom'
+import {Switch, Route, Redirect} from 'react-router-dom'
 
 import ContextComponent from './context/ContextComponent'
 import ProtectedComponent from './components/ProtectedComponent'
-import Home from './components/Home'
+import HomeRoute from './components/HomeRoute'
 import Login from './components/Login'
-import SavedVideos from './components/SavedVideos'
+import SavedVideosRoute from './components/SavedVideosRoute'
 import TrendingRoute from './components/TrendingRoute'
 import GamingRoute from './components/GamingRoute'
 
 import NotFound from './components/NotFound'
 
 import './App.css'
-import VideoItemDetails from './components/VideoItemDetails'
+import VideoDetailsRoute from './components/VideoDetailsRoute'
 
 class App extends Component {
   state = {isDarkTheme: false, savedVideosList: [], activeTab: 'initial'}
@@ -58,11 +58,11 @@ class App extends Component {
       >
         <Switch>
           <Route exact path="/login" component={Login} />
-          <ProtectedComponent exact path="/" component={Home} />
+          <ProtectedComponent exact path="/" component={HomeRoute} />
           <ProtectedComponent
             exact
             path="/videos/:id"
-            component={VideoItemDetails}
+            component={VideoDetailsRoute}
           />
           <ProtectedComponent
             exact
@@ -72,10 +72,11 @@ class App extends Component {
           <ProtectedComponent exact path="/gaming" component={GamingRoute} />
           <ProtectedComponent
             exact
-            path="/savedVideos"
-            component={SavedVideos}
+            path="/saved-videos"
+            component={SavedVideosRoute}
           />
-          <NotFound />
+          <Route path="/not-found" component={NotFound} />
+          <Redirect to="not-found" />
         </Switch>
       </ContextComponent.Provider>
     )

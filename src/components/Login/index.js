@@ -32,8 +32,7 @@ class Login extends Component {
 
   onSubmitSuccess = jwtToken => {
     const {history} = this.props
-    Cookies.set('a7_token', jwtToken, {expires: 10, path: '/'})
-
+    Cookies.set('jwt_token', jwtToken, {expires: 10, path: '/'})
     history.replace('/')
   }
 
@@ -65,7 +64,7 @@ class Login extends Component {
   }
 
   render() {
-    const jwtToken = Cookies.get('a7_token')
+    const jwtToken = Cookies.get('jwt_token')
     if (jwtToken !== undefined) {
       return <Redirect to="/" />
     }
@@ -85,7 +84,7 @@ class Login extends Component {
             alt="website logo"
           />
           <FormContainer onSubmit={this.onSubmitFormDetails}>
-            <Label htmlFor="username">USER NAME</Label>
+            <Label htmlFor="username">USERNAME</Label>
             <Input
               id="username"
               onChange={this.onChangeUserName}
@@ -114,7 +113,7 @@ class Login extends Component {
               </Label>
             </ShowPasswordContainer>
             <Button type="submit">Login</Button>
-            {showSubmitError && <ErrorMsg>{errorMsg}</ErrorMsg>}
+            {showSubmitError && <ErrorMsg>*{errorMsg}</ErrorMsg>}
           </FormContainer>
         </FormCart>
       </MainContainer>

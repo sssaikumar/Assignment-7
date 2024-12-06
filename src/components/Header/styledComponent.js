@@ -1,19 +1,17 @@
 import styled from 'styled-components'
 
 export const NavContainer = styled.nav`
+  position: fixed;
+  top: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: ${props => (props.isDarkTheme ? '#1c1b1a' : '#fbfce1')};
-  height: 11vh;
-  padding-left: 10px;
-  padding-right: 10px;
+  height: 62px;
+  width: 100%;
+  padding-left: 20px;
+  padding-right: 20px;
   color: ${props => (props.isDarkTheme ? '#fbfce1' : '#050505')};
-  @media (min-width: 768px) {
-    height: 10vh;
-    padding-left: 20px;
-    padding-right: 20px;
-  }
 `
 export const ThemeAndLogoutAndProfileContainer = styled.div`
   display: flex;
@@ -21,15 +19,16 @@ export const ThemeAndLogoutAndProfileContainer = styled.div`
   align-items: center;
 `
 export const LogoImage = styled.img`
-  width: 70px;
+  width: 90px;
+  cursor: pointer;
   @media (min-width: 576px) {
-    width: 90px;
+    width: 100px;
   }
   @media (min-width: 768px) {
-    width: 110px;
+    width: 120px;
   }
   @media (min-width: 1200px) {
-    width: 150px;
+    width: 144px;
   }
 `
 
@@ -37,21 +36,32 @@ export const ThemeButton = styled.button`
   border-width: 0px;
   background-color: transparent;
   padding: 4px;
+  margin-right: 15px;
+  cursor: pointer;
   @media (min-width: 768px) {
     padding: 7px;
   }
 `
 
 export const ProfileImage = styled.img`
-  width: 15%;
+  width: 36px;
+  margin-right: 15px;
   @media (max-width: 767px) {
-    width: 11%;
+    display: none;
+  }
+`
+export const HamburgerIconContainer = styled.div`
+  text-align: center;
+  margin-right: 15px;
+  @media screen and (min-width: 768px) {
+    display: none;
   }
 `
 export const LogoutIconButton = styled.button`
   border-width: 0px;
   background-color: transparent;
   padding: 4px;
+  cursor: pointer;
   @media (min-width: 768px) {
     display: none;
   }
@@ -61,6 +71,7 @@ export const LogoutButton = styled.button`
   height: 23px;
   text-align: center;
   background-color: transparent;
+  cursor: pointer;
   border-radius: 4px;
   color: ${props => (props.isDarkTheme ? '#fbfce1' : 'blue')};
   border: 2px solid ${props => (props.isDarkTheme ? '#fbfce1' : 'blue')};
@@ -104,6 +115,7 @@ export const CancelButton = styled.button`
   padding: 4px;
   border-radius: 4px;
   margin-right: 12px;
+  cursor: pointer;
 `
 export const ConfirmButton = styled.button`
   background-color: blue;
@@ -111,4 +123,5 @@ export const ConfirmButton = styled.button`
   border-width: 0px;
   border-radius: 4px;
   padding: 5px;
+  cursor: pointer;
 `

@@ -3,9 +3,13 @@ import Cookies from 'js-cookie'
 import Loader from 'react-loader-spinner'
 import ContextComponent from '../../context/ContextComponent'
 import Header from '../Header'
-import NavigationLinks from '../NavigationLinks'
-import {MainContainer, LoadSpinnerContainer} from './styledComponent'
-import VideoItemDetailsCard from '../VideoItemDetailsCard'
+import NavigationBar from '../NavigationBar'
+import {
+  VideoDetailsAndNavigationBarContainer,
+  LoadSpinnerContainer,
+} from './styledComponent'
+import VideoDetailsCard from '../VideoDetailsCard'
+import FetchVideosFailure from '../FetchVideosFailure'
 
 const apiStatusConstants = {
   initial: 'IN_INITIAL',
@@ -14,7 +18,7 @@ const apiStatusConstants = {
   loading: 'ON_LOADING',
 }
 
-class VideoItemDetails extends Component {
+class VideoDetailsRoute extends Component {
   state = {
     videoDetails: {},
     apiStatus: apiStatusConstants.initial,
@@ -49,7 +53,7 @@ class VideoItemDetails extends Component {
 
   fetchVideoDetails = async () => {
     this.setState({apiStatus: apiStatusConstants.loading})
-    const jwtToken = Cookies.get('a7_token')
+    const jwtToken = Cookies.get('jwt_token')
     const {match} = this.props
     const {params} = match
     const {id} = params
@@ -85,15 +89,15 @@ class VideoItemDetails extends Component {
   }
 
   renderFetchLoading = () => (
-    <LoadSpinnerContainer>
-      <Loader color="grey" type="TailSpin" size={40} />
+    <LoadSpinnerContainer data-testid="loader">
+      <Loader color="grey" type="TailSpin" size={30} />
     </LoadSpinnerContainer>
   )
 
   renderFetchSuccess = () => {
     const {isLiked, isDisliked, videoDetails} = this.state
     return (
-      <VideoItemDetailsCard
+      <VideoDetailsCard
         onClickLike={this.onClickLike}
         onClickDislike={this.onClickDislike}
         isLiked={isLiked}
@@ -105,12 +109,13 @@ class VideoItemDetails extends Component {
 
   renderAllApiStatusContent = () => {
     const {apiStatus} = this.state
-
     switch (apiStatus) {
       case apiStatusConstants.loading:
         return this.renderFetchLoading()
       case apiStatusConstants.success:
         return this.renderFetchSuccess()
+      case apiStatusConstants.failure:
+        return <FetchVideosFailure retryFetch={this.fetchVideoDetails} />
       default:
         return null
     }
@@ -124,10 +129,13 @@ class VideoItemDetails extends Component {
           return (
             <>
               <Header />
-              <MainContainer isDarkTheme={isDarkTheme}>
-                <NavigationLinks />
+              <VideoDetailsAndNavigationBarContainer
+                data-testid="videoDetailsRoute"
+                isDarkTheme={isDarkTheme}
+              >
+                <NavigationBar />
                 {this.renderAllApiStatusContent()}
-              </MainContainer>
+              </VideoDetailsAndNavigationBarContainer>
             </>
           )
         }}
@@ -135,4 +143,4 @@ class VideoItemDetails extends Component {
     )
   }
 }
-export default VideoItemDetails
+export default VideoDetailsRoute

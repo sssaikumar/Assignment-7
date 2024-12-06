@@ -2,18 +2,29 @@ import styled from 'styled-components'
 
 export const TrendingVideosBgContainer = styled.div`
   display: flex;
+  @media screen and (max-width: 767px) {
+    flex-direction: column;
+  }
   background-color: ${props => (props.isDarkTheme ? '#050505' : '#f2f7f7')};
   color: ${props => (props.isDarkTheme ? 'white' : 'black')};
 `
 export const MainContainer = styled.div`
   width: 100%;
+  margin-top: 124px;
+  @media screen and (min-width: 768px) {
+    margin-left: 200px;
+    margin-top: 62px;
+  }
+  @media screen and (min-width: 992px) {
+    margin-left: 250px;
+  }
 `
 export const LoadSpinnerContainer = styled.div`
   width: 100%;
-  height: 80vh;
+  height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: center;
+  padding-top: 40px;
 `
 
 export const TrendingVideosHeadingContainer = styled.div`

@@ -22,7 +22,7 @@ import {
   Subscribers,
 } from './styledComponent'
 
-const VideoItemDetailsCard = props => {
+const VideoDetailsCard = props => {
   const {onClickLike, onClickDislike} = props
 
   const onClickLikeIcon = () => {
@@ -62,9 +62,9 @@ const VideoItemDetailsCard = props => {
         })
 
         const {isLiked, isDisliked} = props
-        const likeColor = isLiked ? 'blue' : 'grey'
-        const dislikeColor = isDisliked ? 'blue' : 'grey'
-        const saveBtnColor = videoExist ? 'blue' : 'grey'
+        const likeColor = isLiked ? '#2563eb' : '#64748b'
+        const dislikeColor = isDisliked ? '#2563eb' : '#64748b'
+        const saveBtnColor = videoExist ? '#2563eb' : '#64748b'
 
         return (
           <MainContainer isDarkTheme={isDarkTheme}>
@@ -75,26 +75,28 @@ const VideoItemDetailsCard = props => {
                 {viewCount} views <Dot>&</Dot> {publishedAt}
               </ViewsAndDatePara>
               <ActionsContainer>
-                <ActionButton onClick={onClickLikeIcon}>
+                <ActionButton type="button" onClick={onClickLikeIcon}>
                   <BiLike color={likeColor} size={22} />
                   <ActionName color={likeColor}>Like</ActionName>
                 </ActionButton>
-                <ActionButton onClick={onClickDislikeIcon}>
+                <ActionButton type="button" onClick={onClickDislikeIcon}>
                   <BiDislike color={dislikeColor} size={22} />
                   <ActionName color={dislikeColor}>DisLike</ActionName>
                 </ActionButton>
-                <ActionButton onClick={onClickToSave}>
+                <ActionButton type="button" onClick={onClickToSave}>
                   <MdPlaylistAdd color={saveBtnColor} size={22} />
-                  <ActionName color={saveBtnColor}>Save</ActionName>
+                  <ActionName color={saveBtnColor}>
+                    {videoExist ? 'Saved' : 'Save'}
+                  </ActionName>
                 </ActionButton>
               </ActionsContainer>
             </ActionsAndViewAndDateContainer>
             <HorizontalLine />
             <DescriptionContainer isDarkTheme={isDarkTheme}>
-              <ChannelProfile src={profileImageUrl} />
+              <ChannelProfile src={profileImageUrl} alt="channel logo" />
               <ChannelDetailsContainer>
                 <ChannelName isDarkTheme={isDarkTheme}>{name}</ChannelName>
-                <Subscribers>{subscriberCount} subscribers</Subscribers>
+                <Subscribers>{subscriberCount} Subscribers</Subscribers>
                 <Description displayForSmall="none">{description}</Description>
               </ChannelDetailsContainer>
             </DescriptionContainer>
@@ -106,4 +108,4 @@ const VideoItemDetailsCard = props => {
   )
 }
 
-export default VideoItemDetailsCard
+export default VideoDetailsCard

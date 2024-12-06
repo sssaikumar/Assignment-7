@@ -4,8 +4,9 @@ import Cookies from 'js-cookie'
 import Loader from 'react-loader-spinner'
 import ContextComponent from '../../context/ContextComponent'
 import Header from '../Header'
-import NavigationLinks from '../NavigationLinks'
+import NavigationBar from '../NavigationBar'
 import GamingVideoCard from '../GamingVideoCard'
+import FetchVideosFailure from '../FetchVideosFailure'
 
 import {
   GamingBgContainer,
@@ -49,7 +50,7 @@ class GamingRoute extends Component {
 
   fetchVideoDetails = async () => {
     this.setState({apiStatus: apiStatusConstants.loading})
-    const jwtToken = Cookies.get('a7_token')
+    const jwtToken = Cookies.get('jwt_token')
 
     const url = 'https://apis.ccbp.in/videos/gaming'
     const options = {
@@ -68,8 +69,8 @@ class GamingRoute extends Component {
   }
 
   renderFetchLoading = () => (
-    <LoadSpinnerContainer>
-      <Loader color="grey" type="TailSpin" size={40} />
+    <LoadSpinnerContainer data-testid="loader">
+      <Loader color="grey" type="TailSpin" size={30} />
     </LoadSpinnerContainer>
   )
 
@@ -92,6 +93,8 @@ class GamingRoute extends Component {
         return this.renderFetchLoading()
       case apiStatusConstants.success:
         return this.renderFetchSuccess()
+      case apiStatusConstants.failure:
+        return <FetchVideosFailure retryFetch={this.fetchVideoDetails} />
       default:
         return null
     }
@@ -107,8 +110,8 @@ class GamingRoute extends Component {
             <>
               <Header />
               <GamingBgContainer isDarkTheme={isDarkTheme}>
-                <NavigationLinks />
-                <MainContainer isDarkTheme={isDarkTheme}>
+                <NavigationBar />
+                <MainContainer data-testid="gaming" isDarkTheme={isDarkTheme}>
                   {apiStatus === 'ON_SUCCESS' && (
                     <GamingHeadingContainer isDarkTheme={isDarkTheme}>
                       <GamingIconContainer>

@@ -2,14 +2,23 @@ import styled from 'styled-components'
 
 export const SavedVideosBgContainer = styled.div`
   display: flex;
+  @media screen and (max-width: 767px) {
+    flex-direction: column;
+  }
   background-color: ${props => (props.isDarkTheme ? '#0f0f0e' : '#f2f7f7')};
   color: ${props => (props.isDarkTheme ? 'white' : 'black')};
   margin: 0px;
 `
 export const MainContainer = styled.div`
   width: 100%;
-  @media screen and (min-width: 576px) and (max-width: 767px) {
-    width: 100%;
+  min-height: 100vh;
+  margin-top: 124px;
+  @media screen and (min-width: 768px) {
+    margin-left: 200px;
+    margin-top: 62px;
+  }
+  @media screen and (min-width: 992px) {
+    margin-left: 250px;
   }
 `
 
@@ -46,5 +55,31 @@ export const ListOfSavedVideos = styled.ul`
 `
 
 export const NoVideosImage = styled.img`
-  width: 80%;
+  width: 45%;
+  margin-bottom: 15px;
+`
+export const NoVideosContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding-top: 30px;
+  padding-bottom: 20px;
+  padding-left: 11px;
+  padding-right: 11px;
+  font-family: roboto;
+  background-color: ${props => (props.isDarkTheme ? '#0f0f0e' : '#f2f7f7')};
+  color: ${props => (props.isDarkTheme ? 'white' : 'black')};
+`
+export const NoVideosHeading = styled.h1`
+  font-size: 18px;
+  font-weight: 500;
+  margin: 5px;
+  text-align: center;
+`
+export const NoVideosPara = styled.p`
+  font-size: 13px;
+  font-weight: 500;
+  margin: 5px;
+  text-align: center;
 `
